@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        mName.setText("");
+        mName.setText(null);
 
 
     }
@@ -39,9 +39,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        Toast.makeText(this, "배고파요!", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, ResultActivity.class);
-        startActivity(intent);
-    }
+        String name = mName.getText().toString();
 
+//
+//        if (name == null) {
+//            Toast.makeText(this, "이름을 입력해 주세요!", Toast.LENGTH_LONG).show();
+//        } else {
+//            Toast.makeText(this, name + "씨, 배고파요!", Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this, ResultActivity.class);
+//            startActivity(intent);
+//        }  형으니><
+
+        try {
+            Toast.makeText(this, name + "씨, 배고파요!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, ResultActivity.class);
+            startActivity(intent);
+
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "이름을 입력해 주세요!", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "뭔지 모르지만 잘 안되네요!", Toast.LENGTH_LONG).show();
+        }
+    }
 }
